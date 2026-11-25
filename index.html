@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RelieFin — Tu copiloto para reorganizar tus deudas</title>
+  <meta name="description" content="Tu copiloto para reorganizar tus deudas en Colombia. Organiza tus obligaciones, define tu objetivo y compara alternativas financieras transparentes.">
+  <meta property="og:title" content="RelieFin — Tu copiloto para reorganizar tus deudas">
+  <meta property="og:description" content="Tu copiloto para reorganizar tus deudas en Colombia. Organiza tus obligaciones, define tu objetivo y compara alternativas financieras transparentes.">
+
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0B2530',      // Azul petróleo profundo
+              card: '#123440',
+              teal: '#0D9488',      // Turquesa / verde azulado
+              tealLight: '#14B8A6',
+              cyan: '#0EA5E9',
+              bgLight: '#F8FAFC',
+              surface: '#FFFFFF',
+              border: '#E2E8F0',
+              muted: '#64748B',
+              amber: '#D97706',     // Trade-offs y advertencias
+              amberLight: '#FEF3C7',
+              green: '#059669',     // Mejoras verificables
+              greenLight: '#D1FAE5'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+      background-color: #F1F5F9;
+      color: #0F172A;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mobile-frame {
+      max-width: 440px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: #FFFFFF;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .desktop-frame {
+      max-width: 960px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: #FFFFFF;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    @keyframes pulseSlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .animate-pulse-slow {
+      animation: pulseSlow 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Barra superior utilitaria: switcher móvil / desktop y reinicio -->
+  <div class="bg-brand-dark text-slate-300 text-xs py-2 px-4 flex items-center justify-between border-b border-slate-700/60 sticky top-0 z-50">
+    <div class="flex items-center space-x-2">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-semibold text-white tracking-wide">RelieFin V3.2 — En desarrollo</span>
+      <span class="hidden sm:inline text-slate-400">| Copiloto Deudas Colombia</span>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <!-- Selector de vista móvil / expandida -->
+      <button id="toggle-view-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded border border-slate-600 transition flex items-center space-x-1 cursor-pointer">
+        <span id="view-mode-label">📱 Vista Móvil (440px)</span>
+      </button>
+
+      <!-- Botón de ver analíticas del MVP -->
+      <button id="view-analytics-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-1 rounded border border-slate-600 transition cursor-pointer">
+        📊 Métricas
+      </button>
+
+      <!-- Reiniciar datos -->
+      <button id="reset-data-btn" class="text-rose-300 hover:text-rose-100 transition font-medium cursor-pointer">
+        Reiniciar demo
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor dinámico de la aplicación -->
+  <div id="app-wrapper" class="mobile-frame transition-all duration-300 pb-16">
+    <div id="app-root">
+      <div class="p-8 text-center text-slate-500">Cargando RelieFin V3.2 — En desarrollo...</div>
+    </div>
+  </div>
+
+  <!-- Modal Global de Analíticas del MVP -->
+  <div id="analytics-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="bg-brand-dark p-4 text-white flex justify-between items-center">
+        <div>
+          <h3 class="font-bold text-base">Métricas & Eventos de RelieFin</h3>
+          <p class="text-xs text-slate-300">Monitoreo de conversión local y servicios en evaluación</p>
+        </div>
+        <button id="close-analytics-btn" class="text-slate-300 hover:text-white text-xl font-bold p-1 cursor-pointer">&times;</button>
+      </div>
+      <div id="analytics-content" class="p-4 overflow-y-auto space-y-4 text-sm text-slate-700">
+        <!-- Inyectado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Principal de la Aplicación -->
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
